@@ -9,6 +9,13 @@ use App\Services\SMS\SmsServiceInterface;
 
 class SmsVerificationController extends Controller
 {
+    /**
+     * recebe o número do celular por SMS e envia o token de validação
+     *
+     * @param string $celNumber
+     * @param SmsServiceInterface $smsService
+     * @return void
+     */
     public function send(string $celNumber, SmsServiceInterface $smsService)
     {
         $code = \mt_rand(1000, 9999);
