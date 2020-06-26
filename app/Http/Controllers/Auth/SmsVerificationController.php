@@ -10,7 +10,7 @@ use App\Services\SMS\SmsServiceInterface;
 class SmsVerificationController extends Controller
 {
     /**
-     * recebe o número do celular por SMS e envia o token de validação
+     * recebe o número do celular pela URL e envia o código de validação por SMS
      *
      * @param string $celNumber
      * @param SmsServiceInterface $smsService
