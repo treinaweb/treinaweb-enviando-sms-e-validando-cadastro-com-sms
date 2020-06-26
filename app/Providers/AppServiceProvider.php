@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('App\Services\SMS\SmsServiceInterface', function($app) {
+            return new \App\Services\SMS\Providers\InfobipProvider;
+        });
     }
 
     /**

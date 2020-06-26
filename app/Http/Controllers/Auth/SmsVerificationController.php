@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\SmsService;
+use App\Services\SMS\SmsServiceInterface;
 
 
 class SmsVerificationController extends Controller
 {
-    public function send(string $celNumber, SmsService $smsService)
+    public function send(string $celNumber, SmsServiceInterface $smsService)
     {
         $code = \mt_rand(1000, 9999);
 
