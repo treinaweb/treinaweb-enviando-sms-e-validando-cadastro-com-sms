@@ -15,21 +15,23 @@ class SmsVerificationController extends Controller
 
         session(['code' => $code]);
 
-        // $response = Http::withHeaders([
-        //     'Authorization' => 'App 6ea409a5462d773242f3f33c0833700c-2f52fc97-232f-484e-ad2a-2cca3cf83426'
-        // ])
-        // ->post('https://yrrlpg.api.infobip.com/sms/2/text/advanced', [
-        //     'messages' => [
-        //         'from' => 'treinaweb',
-        //         'destinations' => [
-        //             'to' => '55' . $celNumber
-        //         ],
-        //         'text' => 'minha primeira mensagem 2'
-        //     ]
-        // ]);
+        $response = Http::withHeaders([
+            'Authorization' => 'App 6ea409a5462d773242f3f33c0833700c-2f52fc97-232f-484e-ad2a-2cca3cf83426'
+        ])
+        ->post('https://yrrlpg.api.infobip.com/sms/2/text/advanced', [
+            'messages' => [
+                'from' => 'treinaweb',
+                'destinations' => [
+                    'to' => '55' . $celNumber
+                ],
+                'text' => "Seu codigo de verificacao e: $code"
+            ]
+        ]);
 
-        // dd($response->successful());
+        if ($response->successful()) {
+            return 'enviado';
+        }
 
-        return $code;
+        return response('nao-enviado', $response->status());
     }
 }

@@ -7,7 +7,12 @@ validationButton.addEventListener('click', function(event) {
 
     let url = `http://sms.test/send-sms/${celNumber.value}`;
     
-    fetch(url).then(function(response) {
+    fetch(url, {
+        headers: {
+            "X-CSRF-Token": $('input[name="_token"]').val()
+        },
+        method: "post"
+    }).then(function(response) {
         if (response.ok) {
             alert('O código de validação foi enviado para seu celular');
 

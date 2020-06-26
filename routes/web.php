@@ -21,4 +21,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/send-sms/{celnumber}', 'Auth\SmsVerificationController@send');
+Route::post('/send-sms/{celnumber}', 'Auth\SmsVerificationController@send');
