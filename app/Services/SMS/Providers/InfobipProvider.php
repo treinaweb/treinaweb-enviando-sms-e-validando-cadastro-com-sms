@@ -7,12 +7,22 @@ use App\Services\SMS\SmsServiceInterface;
 
 class InfobipProvider implements SmsServiceInterface
 {
+    private $token;
+
+    private $url;
+
+    public function __construct(string $token, string $url)
+    {
+        $this->token = $token;
+        $this->url = $url;
+    }
+
     public function send(string $celNumber, string $msg): int
     {
         $response = Http::withHeaders([
-            'Authorization' => 'App 6ea409a5462d773242f3f33c0833700c-2f52fc97-232f-484e-ad2a-2cca3cf83426'
+            'Authorization' => "App {$this->token}"
         ])
-        ->post('https://yrrlpg.api.infobip.com/sms/2/text/advanced', [
+        ->post("{$this->url}/text/advanced", [
             'messages' => [
                 'from' => 'treinaweb',
                 'destinations' => [

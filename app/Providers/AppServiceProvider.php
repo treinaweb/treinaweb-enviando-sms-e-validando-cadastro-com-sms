@@ -14,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('App\Services\SMS\SmsServiceInterface', function($app) {
-            return new \App\Services\SMS\Providers\InfobipProvider;
+            $token = config('services.infobip.token');
+            $url = config('services.infobip.url');
+
+            return new \App\Services\SMS\Providers\InfobipProvider($token, $url);
         });
     }
 
