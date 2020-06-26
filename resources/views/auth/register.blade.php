@@ -77,7 +77,7 @@
                             <button id="validation-button" class="col-md-2 btn btn-danger">Validar</button>
                         </div>
 
-                        <div id="validation-code-container" class="form-group row d-none">
+                        <div id="validation-code-container" class="form-group row {{ old('validation-code') ? '' : 'd-none' }}">
                             <label for="validation-code" class="col-md-4 col-form-label text-md-right">Código Validação</label>
 
                             <div class="col-md-6">

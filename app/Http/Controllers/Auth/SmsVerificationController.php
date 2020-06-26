@@ -11,6 +11,10 @@ class SmsVerificationController extends Controller
 {
     public function send(string $celNumber)
     {
+        $code = \mt_rand(1000, 9999);
+
+        session(['code' => $code]);
+
         // $response = Http::withHeaders([
         //     'Authorization' => 'App 6ea409a5462d773242f3f33c0833700c-2f52fc97-232f-484e-ad2a-2cca3cf83426'
         // ])
@@ -26,6 +30,6 @@ class SmsVerificationController extends Controller
 
         // dd($response->successful());
 
-        return 'ok';
+        return $code;
     }
 }
