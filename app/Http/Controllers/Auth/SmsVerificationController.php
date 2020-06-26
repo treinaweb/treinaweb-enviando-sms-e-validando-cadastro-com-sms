@@ -4,34 +4,26 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
+use App\Services\SmsService;
 
 
 class SmsVerificationController extends Controller
 {
-    public function send(string $celNumber)
+    public function send(string $celNumber, SmsService $smsService)
     {
         $code = \mt_rand(1000, 9999);
 
         session(['code' => $code]);
 
-        $response = Http::withHeaders([
-            'Authorization' => 'App 6ea409a5462d773242f3f33c0833700c-2f52fc97-232f-484e-ad2a-2cca3cf83426'
-        ])
-        ->post('https://yrrlpg.api.infobip.com/sms/2/text/advanced', [
-            'messages' => [
-                'from' => 'treinaweb',
-                'destinations' => [
-                    'to' => '55' . $celNumber
-                ],
-                'text' => "Seu codigo de verificacao e: $code"
-            ]
-        ]);
+        $response = $smsService->send(
+            $celNumber, 
+            "Seu codigo de verificacao e: $code"
+        );
 
-        if ($response->successful()) {
+        if ($response == 200) {
             return 'enviado';
         }
 
-        return response('nao-enviado', $response->status());
+        return response('nao-enviado', $response);
     }
 }
