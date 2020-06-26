@@ -37227,6 +37227,8 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./validation-sms */ "./resources/js/validation-sms.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37271,6 +37273,29 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/validation-sms.js":
+/*!****************************************!*\
+  !*** ./resources/js/validation-sms.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var validationButton = document.getElementById('validation-button');
+var celNumber = document.getElementById('celnumber');
+var validationCodeContainer = document.getElementById('validation-code-container');
+validationButton.addEventListener('click', function (event) {
+  event.preventDefault();
+  var url = "http://sms.test/send-sms/".concat(celNumber.value);
+  fetch(url).then(function (response) {
+    if (response.ok) {
+      alert('O código de validação foi enviado para seu celular');
+      validationCodeContainer.classList.remove('d-none');
+    }
+  });
+});
 
 /***/ }),
 

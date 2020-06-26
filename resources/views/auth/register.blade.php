@@ -61,6 +61,36 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="celnumber" class="col-md-4 col-form-label text-md-right">Celular</label>
+
+                            <div class="col-md-6">
+                                <input id="celnumber" type="text" class="form-control @error('celnumber') is-invalid @enderror" name="celnumber" value="{{ old('celnumber') }}" required >
+
+                                @error('celnumber')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <button id="validation-button" class="col-md-2 btn btn-danger">Validar</button>
+                        </div>
+
+                        <div id="validation-code-container" class="form-group row d-none">
+                            <label for="validation-code" class="col-md-4 col-form-label text-md-right">Código Validação</label>
+
+                            <div class="col-md-6">
+                                <input id="validation-code" type="text" class="form-control @error('validation-code') is-invalid @enderror" name="validation-code" value="{{ old('validation-code') }}" required >
+
+                                @error('validation-code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
